@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intranet - Ofertas, Links e Livros</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+<style>
+  body { font-family: 'Inter', sans-serif; }
+  .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+  .custom-scrollbar::-webkit-scrollbar-track { background: rgba(0,0,0,.05); border-radius: 8px; }
+  .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(168,85,247,.3); border-radius: 8px; }
+  .wa-bg { background-color:#f3effa; background-image: radial-gradient(#d8ccf1 .75px, transparent .75px), radial-gradient(#d8ccf1 .75px, #f3effa .75px); background-size:30px 30px; background-position:0 0, 15px 15px; }
+  .tg-bg { background-color:#ebf5fb; background-image: radial-gradient(#cce4f7 .85px, transparent .85px), radial-gradient(#cce4f7 .85px, #ebf5fb .85px); background-size:28px 28px; background-position:0 0, 14px 14px; }
+  .nav-scroll { scrollbar-width: none; }
+  .nav-scroll::-webkit-scrollbar { display: none; }
+  .view { display: none; }
+  .view.active { display: block; }
+</style>
+</head>
+<body class="bg-purple-50/60 min-h-screen text-slate-800 pb-28 md:pb-12">
+
+<!-- Cabeçalho + navegação -->
+<header class="bg-purple-700 text-white shadow-md sticky top-0 z-30">
+  <div class="max-w-6xl mx-auto px-4 pt-3.5 pb-2">
+    <button onclick="go('home')" class="flex items-center gap-3 text-left">
+      <div class="bg-white/15 p-2.5 rounded-xl text-lg flex items-center justify-center ring-2 ring-purple-600">
+        <i class="fa-solid fa-house-chimney"></i>
+      </div>
+      <div>
+        <h1 class="text-lg md:text-2xl font-bold leading-tight">Intranet</h1>
+        <p class="text-xs md:text-sm text-purple-100">Ferramentas para WhatsApp e Telegram</p>
+      </div>
+    </button>
+    <nav class="nav-scroll flex gap-2 overflow-x-auto mt-3 pb-1">
+      <button data-nav="home" onclick="go('home')" class="shrink-0 px-3.5 py-2 text-xs md:text-sm font-semibold rounded-xl transition-colors flex items-center gap-1.5"><i class="fa-solid fa-house"></i> Início</button>
+      <button data-nav="ofertas" onclick="go('ofertas')" class="shrink-0 px-3.5 py-2 text-xs md:text-sm font-semibold rounded-xl transition-colors flex items-center gap-1.5"><i class="fa-solid fa-tags"></i> Gerador de Ofertas</button>
+      <button data-nav="links" onclick="go('links')" class="shrink-0 px-3.5 py-2 text-xs md:text-sm font-semibold rounded-xl transition-colors flex items-center gap-1.5"><i class="fa-solid fa-link"></i> Agregador de Links</button>
+      <button data-nav="livros" onclick="go('livros')" class="shrink-0 px-3.5 py-2 text-xs md:text-sm font-semibold rounded-xl transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open"></i> Livros Gratuitos</button>
+    </nav>
+  </div>
+</header>
+
+<main class="max-w-6xl mx-auto px-3 sm:px-4 mt-4 md:mt-6">
+
+  <!-- ===================== INÍCIO ===================== -->
+  <section id="view-home" class="view">
+    <div class="mb-5">
+      <h2 class="text-xl md:text-2xl font-bold text-slate-800">O que você quer fazer?</h2>
+      <p class="text-sm text-slate-500 mt-1">Escolha uma ferramenta para começar.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <button onclick="go('ofertas')" class="text-left bg-white rounded-2xl shadow-sm border border-purple-100 p-5 hover:border-purple-300 hover:shadow-md transition-all active:scale-[0.98]">
+        <div class="w-12 h-12 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-tags"></i></div>
+        <h3 class="font-bold text-slate-800 text-base mb-1">Gerador de Ofertas</h3>
+        <p class="text-sm text-slate-500 mb-4">Monte o post de uma oferta com preço, link, cupom e observação.</p>
+        <span class="text-sm font-semibold text-purple-700 flex items-center gap-1.5">Abrir <i class="fa-solid fa-arrow-right text-xs"></i></span>
+      </button>
+      <button onclick="go('links')" class="text-left bg-white rounded-2xl shadow-sm border border-purple-100 p-5 hover:border-purple-300 hover:shadow-md transition-all active:scale-[0.98]">
+        <div class="w-12 h-12 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-link"></i></div>
+        <h3 class="font-bold text-slate-800 text-base mb-1">Agregador de Links</h3>
+        <p class="text-sm text-slate-500 mb-4">Junte vários livros com preço De/Por e link em uma só mensagem.</p>
+        <span class="text-sm font-semibold text-purple-700 flex items-center gap-1.5">Abrir <i class="fa-solid fa-arrow-right text-xs"></i></span>
+      </button>
+      <button onclick="go('livros')" class="text-left bg-white rounded-2xl shadow-sm border border-purple-100 p-5 hover:border-purple-300 hover:shadow-md transition-all active:scale-[0.98]">
+        <div class="w-12 h-12 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-book-open"></i></div>
+        <h3 class="font-bold text-slate-800 text-base mb-1">Livros Gratuitos</h3>
+        <p class="text-sm text-slate-500 mb-4">Lista numerada de ebooks Kindle gratuitos, com cabeçalho e rodapé.</p>
+        <span class="text-sm font-semibold text-purple-700 flex items-center gap-1.5">Abrir <i class="fa-solid fa-arrow-right text-xs"></i></span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ===================== GERADOR DE OFERTAS ===================== -->
+  <section id="view-ofertas" class="view">
+    <div class="mb-4">
+      <h2 class="text-xl md:text-2xl font-bold text-slate-800 flex items-center gap-2"><i class="fa-solid fa-tags text-purple-600"></i> Gerador de Ofertas</h2>
+      <p class="text-sm text-slate-500 mt-1">Gere e copie com a formatação certa para WhatsApp ou Telegram.</p>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-6">
+      <div class="lg:col-span-7">
+        <div class="bg-white rounded-2xl shadow-sm border border-purple-100 p-4 md:p-6 space-y-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">📖 Nome do Item</label>
+            <input type="text" id="ofItem" oninput="ofGerar()" placeholder="Ex: Smartphone XYZ 128GB" class="w-full px-3 py-2.5 bg-white border border-purple-200 rounded-xl text-sm focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none transition-all">
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">💸 Preço DE (antigo)</label>
+              <input type="text" id="ofDe" inputmode="decimal" oninput="ofGerar()" placeholder="Ex: 1.500,00" class="w-full px-3 py-2.5 bg-white border border-purple-200 rounded-xl text-sm focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none transition-all">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">💸 Preço POR (atual)</label>
+              <input type="text" id="ofPor" inputmode="decimal" oninput="ofGerar()" placeholder="Ex: 1.200,00" class="w-full px-3 py-2.5 bg-white border border-purple-200 rounded-xl text-sm focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none transition-all">
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">👉 Link de Compra</label>
+            <input type="text" id="ofLink" oninput="ofGerar()" placeholder="Ex: https://sualink.com/oferta" class="w-full px-3 py-2.5 bg-white border border-purple-200 rounded-xl text-sm focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none transition-all font-mono text-xs">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">🏷️ Cupom de Desconto <span class="text-slate-400 font-normal">(opcional)</span></label>
+            <input type="text" id="ofCupom" oninput="ofGerar()" placeholder="Ex: DESCONTO10" class="w-full px-3 py-2.5 bg-white border border-purple-200 rounded-xl text-sm focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none transition-all">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">📝 Observação <span class="text-slate-400 font-normal">(opcional)</span></label>
+            <input type="text" id="ofObs" oninput="ofGerar()" placeholder="Ex: Frete grátis para algumas regiões" class="w-full px-3 py-2.5 bg-white border border-purple-200 rounded-xl text-sm focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none transition-all">
+          </div>
+          <div class="flex justify-end">
+            <button onclick="ofLimpar()" class="text-xs md:text-sm text-red-600 hover:text-red-800 font-semibold py-2 px-3 rounded-xl hover:bg-red-50 transition-colors flex items-center gap-1.5"><i class="fa-solid fa-rotate-left"></i> Limpar campos</button>
+          </div>
+        </div>
+      </div>
+      <div class="lg:col-span-5">
+        <div class="bg-white rounded-2xl shadow-sm border border-purple-100 p-4 md:p-6 lg:sticky lg:top-36">
+          <h3 class="font-bold text-slate-800 text-base md:text-lg flex items-center gap-2 mb-1"><i class="fa-solid fa-pen-to-square text-purple-600"></i> Mensagem gerada</h3>
+          <p class="text-xs text-slate-500 mb-3">Edite livremente se quiser. A caixa usa o padrão do WhatsApp (* e ~); o Telegram converte para (** e ~~) ao copiar.</p>
+          <textarea id="ofResultado" oninput="ofManual()" rows="12" class="w-full p-3 bg-purple-50/30 border border-purple-200/80 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-sm leading-relaxed outline-none transition-all resize-y font-mono"></textarea>
+          <button id="ofRegen" onclick="ofRegen()" class="hidden mt-2 text-xs text-purple-600 hover:text-purple-800 font-semibold underline">↻ Voltar a gerar automaticamente</button>
+          <div class="mt-4 space-y-2.5">
+            <button onclick="ofCopiar('whatsapp')" class="w-full py-3 px-5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm rounded-xl shadow-md shadow-emerald-600/20 transition-all flex items-center justify-center gap-2 active:scale-95"><i class="fa-brands fa-whatsapp text-lg"></i> Copiar para o WhatsApp (* e ~)</button>
+            <button onclick="ofCopiar('telegram')" class="w-full py-3 px-5 bg-[#229ED9] hover:bg-[#1a8bc2] text-white font-bold text-sm rounded-xl shadow-md shadow-[#229ED9]/20 transition-all flex items-center justify-center gap-2 active:scale-95"><i class="fa-brands fa-telegram text-lg"></i> Copiar para o Telegram (** e ~~)</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== AGREGADOR DE LINKS ===================== -->
+  <section id="view-links" class="view">
+    <div class="mb-4">
+      <h2 class="text-xl md:text-2xl font-bold text-slate-800 flex items-center gap-2"><i class="fa-solid fa-link text-purple-600"></i> Agregador de Links</h2>
+      <p class="text-sm text-slate-500 mt-1">Vários livros com preço De/Por e link em uma única mensagem.</p>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-6">
+      <div class="lg:col-span-7">
+        <div class="bg-white rounded-2xl shadow-sm border border-purple-100 p-4 md:p-6">
+          <div class="flex items-center justify-between mb-4 pb-3 border-b border-purple-50">
+            <h3 class="font-bold text-slate-800 text-base md:text-lg flex items-center gap-2"><i class="fa-solid fa-book-bookmark text-purple-600"></i> Lista de Livros</h3>
+            <span id="lkBadge" class="bg-purple-100 text-purple-800 text-xs font-bold px-3 py-1 rounded-full">1 livro</span>
+          </div>
+          <div id="lkLista" class="space-y-4"></div>
+          <div class="mt-5 pt-3 border-t border-purple-50">
+            <button onclick="lkAdd()" class="w-full py-3.5 px-4 bg-purple-50 hover:bg-purple-100/80 text-purple-700 font-bold text-sm md:text-base rounded-xl border border-purple-200 transition-all flex items-center justify-center gap-2 hover:shadow-sm active:scale-[0.98]"><i class="fa-solid fa-plus text-base"></i> Adicionar livro</button>
+          </div>
+        </div>
+      </div>
+      <div class="lg:col-span-5">
+        <div class="bg-white rounded-2xl shadow-sm border border-purple-100 p-4 md:p-6 lg:sticky lg:top-36">
+          <h3 class="font-bold text-slate-800 text-base md:text-lg flex items-center gap-2 mb-1"><i class="fa-solid fa-pen-to-square text-purple-600"></i> Mensagem gerada</h3>
+          <p class="text-xs text-slate-500 mb-3">Edite livremente se quiser. A caixa usa o padrão do WhatsApp (* e ~); o Telegram converte para (** e ~~) ao copiar.</p>
+          <textarea id="lkResultado" oninput="lkManual()" rows="12" class="w-full p-3 bg-purple-50/30 border border-purple-200/80 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-sm leading-relaxed outline-none transition-all resize-y font-mono"></textarea>
+          <button id="lkRegen" onclick="lkRegen()" class="hidden mt-2 text-xs text-purple-600 hover:text-purple-800 font-semibold underline">↻ Voltar a gerar automaticamente</button>
+          <div class="mt-4 space-y-2.5">
+            <button onclick="lkCopiar('whatsapp')" class="w-full py-3 px-5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm rounded-xl shadow-md shadow-emerald-600/20 transition-all flex items-center justify-center gap-2 active:scale-95"><i class="fa-brands fa-whatsapp text-lg"></i> Copiar para o WhatsApp (* e ~)</button>
+            <button onclick="lkCopiar('telegram')" class="w-full py-3 px-5 bg-[#229ED9] hover:bg-[#1a8bc2] text-white font-bold text-sm rounded-xl shadow-md shadow-[#229ED9]/20 transition-all flex items-center justify-center gap-2 active:scale-95"><i class="fa-brands fa-telegram text-lg"></i> Copiar para o Telegram (** e ~~)</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== LIVROS GRATUITOS ===================== -->
+  <section id="view-livros" class="view">
+    <div class="mb-4 flex items-start justify-between gap-3">
+      <div>
+        <h2 class="text-xl md:text-2xl font-bold text-slate-800 flex items-center gap-2"><i class="fa-solid fa-book-open text-purple-600"></i> Livros Gratuitos</h2>
+        <p class="text-sm text-slate-500 mt-1">Posts de ebooks Kindle formatados para WhatsApp e Telegram.</p>
+      </div>
+      <button onclick="resetForm()" class="shrink-0 px-3 py-2 text-xs md:text-sm bg-purple-700 hover:bg-purple-800 text-white font-medium rounded-xl transition-colors flex items-center gap-1.5 shadow-sm active:scale-95" title="Apagar todos os campos e limpar dados salvos">
+        <i class="fa-solid fa-trash-can"></i> <span>Limpar Tudo</span>
+      </button>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-6">
+      <div class="lg:col-span-7 space-y-4 md:space-y-6">
+
+        <div class="bg-white rounded-2xl shadow-sm border border-purple-100 p-4 md:p-6">
+          <div class="flex items-center justify-between mb-2 md:mb-3">
+            <label class="font-semibold text-slate-800 text-sm md:text-base flex items-center gap-2"><i class="fa-solid fa-heading text-purple-600"></i> Mensagem do Cabeçalho</label>
+            <button onclick="restoreDefaultHeader()" class="text-xs text-purple-600 hover:text-purple-800 font-semibold py-1 px-2 rounded-lg hover:bg-purple-50 transition-colors">Restaurar Padrão</button>
+          </div>
+          <textarea id="headerText" rows="4" class="w-full p-3 bg-purple-50/30 border border-purple-200/80 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-sm leading-relaxed outline-none transition-all resize-y" placeholder="Mensagem do topo..."></textarea>
+          <p class="text-xs text-slate-500 mt-2 flex items-center gap-1.5 flex-wrap">
+            <i class="fa-solid fa-circle-info text-purple-500"></i>
+            <span>Formate com <code class="bg-purple-100 px-1 py-0.5 rounded text-purple-800 font-semibold">*negrito*</code> ou <code class="bg-purple-100 px-1 py-0.5 rounded text-purple-800 font-semibold">~riscado~</code>. O sistema converterá para <code class="bg-blue-100 px-1 py-0.5 rounded text-blue-800 font-semibold">**</code> e <code class="bg-blue-100 px-1 py-0.5 rounded text-blue-800 font-semibold">~~</code> no Telegram.</span>
+          </p>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm border border-purple-100 p-4 md:p-6">
+          <div class="flex items-center justify-between mb-4 pb-3 border-b border-purple-50">
+            <div>
+              <h3 class="font-bold text-slate-800 text-base md:text-lg flex items-center gap-2"><i class="fa-solid fa-book-bookmark text-purple-600"></i> Lista de Livros</h3>
+              <p class="text-xs text-slate-500">Adicione os livros que estarão disponíveis hoje</p>
+            </div>
+            <span id="bookCountBadge" class="bg-purple-100 text-purple-800 text-xs font-bold px-3 py-1 rounded-full">1 livro</span>
+          </div>
+          <div id="booksContainer" class="space-y-4"></div>
+          <div class="mt-5 pt-3 border-t border-purple-50">
+            <button onclick="addBookInput()" class="w-full py-3.5 px-4 bg-purple-50 hover:bg-purple-100/80 text-purple-700 font-bold text-sm md:text-base rounded-xl border border-purple-200 transition-all flex items-center justify-center gap-2 hover:shadow-sm active:scale-[0.98]"><i class="fa-solid fa-plus text-base"></i> Adicionar + 1 Livro</button>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm border border-purple-100 p-4 md:p-6">
+          <label class="font-semibold text-slate-800 text-sm md:text-base flex items-center gap-2 mb-2"><i class="fa-solid fa-align-bottom text-purple-600"></i> Rodapé da Mensagem (Opcional)</label>
+          <input type="text" id="footerText" class="w-full p-3 bg-purple-50/30 border border-purple-200/80 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-sm outline-none transition-all" placeholder="Ex: Aproveite pois a promoção é por tempo limitado! 🚀">
+        </div>
+      </div>
+
+      <div class="lg:col-span-5">
+        <div class="bg-white rounded-2xl shadow-sm border border-purple-100 p-4 md:p-6 lg:sticky lg:top-36">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="font-bold text-slate-800 text-base md:text-lg flex items-center gap-2"><i class="fa-solid fa-eye text-purple-600"></i> Pré-visualização</h3>
+            <div class="inline-flex p-0.5 bg-slate-100 rounded-lg text-xs font-semibold">
+              <button id="tabWa" onclick="switchPreviewMode('whatsapp')" class="px-2.5 py-1 rounded-md transition-all flex items-center gap-1 bg-white text-emerald-700 shadow-xs"><i class="fa-brands fa-whatsapp"></i> WhatsApp</button>
+              <button id="tabTg" onclick="switchPreviewMode('telegram')" class="px-2.5 py-1 rounded-md transition-all flex items-center gap-1 text-slate-500 hover:text-slate-800"><i class="fa-brands fa-telegram"></i> Telegram</button>
+            </div>
+          </div>
+          <div id="previewContainer" class="wa-bg rounded-2xl p-3 md:p-4 border border-purple-200 min-h-[220px] max-h-[380px] md:max-h-[460px] overflow-y-auto custom-scrollbar flex flex-col justify-between shadow-inner transition-colors duration-300">
+            <div class="bg-white rounded-xl p-3.5 shadow-sm border border-purple-100/60 text-slate-800 text-sm leading-relaxed whitespace-pre-wrap break-words font-sans relative" id="previewBox"></div>
+            <div id="previewFooterTag" class="text-[11px] text-purple-600 font-medium text-right mt-2 flex items-center justify-end gap-1"><i class="fa-brands fa-whatsapp"></i> Visualização para WhatsApp (* e ~)</div>
+          </div>
+          <div class="mt-5 hidden md:block space-y-2.5">
+            <button id="copyBtnWa" onclick="copyToClipboard('whatsapp')" class="w-full py-3 px-5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm rounded-xl shadow-md shadow-emerald-600/20 transition-all flex items-center justify-center gap-2 active:scale-95"><i class="fa-brands fa-whatsapp text-lg"></i> Copiar para o WhatsApp (* e ~)</button>
+            <button id="copyBtnTg" onclick="copyToClipboard('telegram')" class="w-full py-3 px-5 bg-[#229ED9] hover:bg-[#1a8bc2] text-white font-bold text-sm rounded-xl shadow-md shadow-[#229ED9]/20 transition-all flex items-center justify-center gap-2 active:scale-95"><i class="fa-brands fa-telegram text-lg"></i> Copiar para o Telegram (** e ~~)</button>
+            <p id="charCounter" class="text-center text-xs text-slate-400 pt-1">0 caracteres</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Barra fixa (celular), só aparece nesta ferramenta -->
+    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-purple-100 p-2.5 z-40 shadow-xl">
+      <div class="max-w-6xl mx-auto flex items-center gap-2">
+        <button id="copyBtnMobileWa" onclick="copyToClipboard('whatsapp')" class="flex-1 py-3 px-3 bg-emerald-600 active:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-sm transition-all flex items-center justify-center gap-1.5 active:scale-95"><i class="fa-brands fa-whatsapp text-base"></i> WhatsApp</button>
+        <button id="copyBtnMobileTg" onclick="copyToClipboard('telegram')" class="flex-1 py-3 px-3 bg-[#229ED9] active:bg-[#1a8bc2] text-white font-bold text-xs rounded-xl shadow-sm transition-all flex items-center justify-center gap-1.5 active:scale-95"><i class="fa-brands fa-telegram text-base"></i> Telegram</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Toast compartilhado -->
+<div id="toast" class="fixed bottom-20 md:bottom-6 right-4 left-4 md:left-auto md:max-w-sm bg-slate-900 text-white px-5 py-3.5 rounded-2xl shadow-2xl flex items-center gap-3 transform translate-y-24 opacity-0 transition-all duration-300 z-50">
+  <i id="toastIcon" class="fa-solid fa-circle-check text-purple-400 text-xl"></i>
+  <div>
+    <p id="toastTitle" class="font-semibold text-sm">Copiado!</p>
+    <p id="toastMessage" class="text-xs text-slate-300">Mensagem pronta para colar.</p>
+  </div>
+</div>
+
+<script>
+/* =============== NAVEGAÇÃO =============== */
+const VIEWS = ['home', 'ofertas', 'links', 'livros'];
+
+function go(view, silent) {
+  if (!VIEWS.includes(view)) view = 'home';
+  VIEWS.forEach(v => document.getElementById('view-' + v).classList.toggle('active', v === view));
+  document.querySelectorAll('[data-nav]').forEach(b => {
+    const on = b.dataset.nav === view;
+    b.className = 'shrink-0 px-3.5 py-2 text-xs md:text-sm font-semibold rounded-xl transition-colors flex items-center gap-1.5 ' +
+      (on ? 'bg-white text-purple-700 shadow-sm' : 'text-purple-100 hover:bg-purple-600');
+  });
+  if (!silent && location.hash !== '#' + view) location.hash = view;
+  window.scrollTo({ top: 0 });
+}
+window.addEventListener('hashchange', () => go(location.hash.slice(1), true));
+
+/* =============== UTILITÁRIOS COMPARTILHADOS =============== */
+function showToast(title, message, iconClass = "fa-solid fa-circle-check text-purple-400") {
+  const toast = document.getElementById('toast');
+  document.getElementById('toastTitle').textContent = title;
+  document.getElementById('toastMessage').textContent = message;
+  document.getElementById('toastIcon').className = `${iconClass} text-xl`;
+  toast.classList.remove('translate-y-24', 'opacity-0');
+  toast.classList.add('translate-y-0', 'opacity-100');
+  clearTimeout(window.toastTimeout);
+  window.toastTimeout = setTimeout(() => {
+    toast.classList.remove('translate-y-0', 'opacity-100');
+    toast.classList.add('translate-y-24', 'opacity-0');
+  }, 3200);
+}
+
+function convertWhatsAppToTelegram(text) {
+  if (!text) return '';
+  return text
+    .replace(/(?<!\*)\*([^*\r\n]+)\*(?!\*)/g, '**$1**')
+    .replace(/(?<!~)~([^~\r\n]+)~(?!~)/g, '~~$1~~');
+}
+
+async function copyText(text) {
+  const t = document.createElement('textarea');
+  t.value = text;
+  t.style.cssText = 'position:fixed;left:-9999px;top:0';
+  document.body.appendChild(t);
+  t.focus(); t.select();
+  let ok = false;
+  try { ok = document.execCommand('copy'); } catch (e) {}
+  document.body.removeChild(t);
+  if (!ok && navigator.clipboard) {
+    try { await navigator.clipboard.writeText(text); ok = true; } catch (e) {}
+  }
+  return ok;
+}
+
+// Copia com conversão por plataforma e mostra o aviso. Retorna true se copiou.
+async function copiarComAviso(textoWa, platform, msgVazia) {
+  if (!textoWa.trim()) {
+    showToast('Mensagem vazia', msgVazia, 'fa-solid fa-circle-exclamation text-amber-400');
+    return false;
+  }
+  const tg = platform === 'telegram';
+  const ok = await copyText(tg ? convertWhatsAppToTelegram(textoWa) : textoWa);
+  if (ok) {
+    showToast(`Copiado para ${tg ? 'Telegram' : 'WhatsApp'}!`,
+      `Caracteres formatados com ${tg ? 'duplicados (** e ~~)' : 'simples (* e ~)'}.`,
+      tg ? 'fa-brands fa-telegram text-[#229ED9]' : 'fa-brands fa-whatsapp text-emerald-400');
+  } else {
+    showToast('Erro ao copiar', 'Selecione o texto manualmente.', 'fa-solid fa-triangle-exclamation text-red-400');
+  }
+  return ok;
+}
+
+const INPUT_CLS = "w-full px-3 py-2.5 bg-white border border-purple-200 rounded-xl text-sm focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none transition-all";
+
+/* =============== GERADOR DE OFERTAS =============== */
+let ofEditado = false;
+const ofVal = id => document.getElementById(id).value.trim();
+
+function ofGerar() {
+  if (ofEditado) return;
+  const item = ofVal('ofItem'), de = ofVal('ofDe'), por = ofVal('ofPor'),
+        link = ofVal('ofLink'), cupom = ofVal('ofCupom'), obs = ofVal('ofObs');
+
+  let m = `📖 *Item*: ${item}\n\n🔥 *Desconto especial aplicado!*\n\n`;
+  if (de && por) m += `💸 *DE* ~R$ ${de}~ *POR* R$ ${por}\n\n`;
+  else if (por) m += `💸 *POR* R$ ${por}\n\n`;
+  else if (de) m += `💸 *DE* R$ ${de}\n\n`;
+  m += `👉 *Compre por aqui:* ${link}\n\n`;
+  if (cupom) m += `🏷️ *Cupom de Desconto:* ${cupom}\n\n`;
+  if (obs) m += `ℹ️ *Observação:* ${obs}\n\n`;
+  m += `⚠️ *Dica:* ative as notificações do canal para não perder nenhuma oferta exclusiva!`;
+  document.getElementById('ofResultado').value = m;
+}
+function ofManual() { ofEditado = true; document.getElementById('ofRegen').classList.remove('hidden'); }
+function ofRegen() { ofEditado = false; document.getElementById('ofRegen').classList.add('hidden'); ofGerar(); }
+function ofLimpar() {
+  ['ofItem', 'ofDe', 'ofPor', 'ofLink', 'ofCupom', 'ofObs'].forEach(id => document.getElementById(id).value = '');
+  ofRegen();
+  showToast('Campos limpos', 'O formulário de ofertas foi reiniciado.', 'fa-solid fa-rotate-left text-purple-400');
+}
+function ofCopiar(p) { copiarComAviso(document.getElementById('ofResultado').value, p, 'Preencha os campos para copiar.'); }
+
+/* =============== AGREGADOR DE LINKS =============== */
+let lkEditado = false;
+
+function lkAdd() {
+  const div = document.createElement('div');
+  div.className = 'lk-book bg-purple-50/40 border border-purple-200/80 rounded-2xl p-3.5 md:p-4 transition-all hover:border-purple-300';
+  div.innerHTML = `
+    <div class="flex items-center justify-between mb-2.5">
+      <span class="lk-title inline-flex items-center gap-1.5 text-xs font-bold text-purple-900 bg-white px-2.5 py-1 rounded-lg border border-purple-200"></span>
+      <button onclick="lkRemove(this)" class="lk-remove text-slate-400 hover:text-red-500 p-1.5 rounded-lg hover:bg-red-50 transition-colors text-xs flex items-center gap-1" title="Remover livro">
+        <i class="fa-solid fa-trash-can"></i> <span class="hidden sm:inline">Remover</span>
+      </button>
+    </div>
+    <div class="space-y-3">
+      <div>
+        <label class="block text-xs font-semibold text-slate-700 mb-1">📖 Nome do livro</label>
+        <input type="text" class="f-nome ${INPUT_CLS}" placeholder="Ex: Dom Casmurro" oninput="lkGerar()">
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">💸 De: R$</label>
+          <input type="text" inputmode="decimal" class="f-de ${INPUT_CLS}" placeholder="Ex: 59,90" oninput="lkGerar()">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">💸 Por: R$</label>
+          <input type="text" inputmode="decimal" class="f-por ${INPUT_CLS}" placeholder="Ex: 39,90" oninput="lkGerar()">
+        </div>
+      </div>
+      <div>
+        <label class="block text-xs font-semibold text-slate-700 mb-1">👉 Link</label>
+        <input type="text" class="f-link ${INPUT_CLS} font-mono text-xs" placeholder="https://..." oninput="lkGerar()">
+      </div>
+    </div>`;
+  document.getElementById('lkLista').appendChild(div);
+  lkTitulos();
+  lkGerar();
+}
+function lkRemove(btn) { btn.closest('.lk-book').remove(); lkTitulos(); lkGerar(); }
+function lkTitulos() {
+  const livros = document.querySelectorAll('.lk-book');
+  livros.forEach((el, i) => {
+    el.querySelector('.lk-title').textContent = 'Livro ' + (i + 1);
+    el.querySelector('.lk-remove').style.display = livros.length > 1 ? '' : 'none';
+  });
+  document.getElementById('lkBadge').textContent = `${livros.length} ${livros.length === 1 ? 'livro' : 'livros'}`;
+}
+function lkGerar() {
+  if (lkEditado) return;
+  const blocos = [];
+  document.querySelectorAll('.lk-book').forEach(el => {
+    const nome = el.querySelector('.f-nome').value.trim();
+    const de = el.querySelector('.f-de').value.trim();
+    const por = el.querySelector('.f-por').value.trim();
+    const link = el.querySelector('.f-link').value.trim();
+    if (!nome && !de && !por && !link) return;
+    let b = `📖 *${nome}*\n`;
+    if (de && por) b += `💸 *DE* ~R$ ${de}~ *POR* R$ ${por}\n`;
+    else if (por) b += `💸 *POR* R$ ${por}\n`;
+    else if (de) b += `💸 *DE* R$ ${de}\n`;
+    if (link) b += `👉 ${link}`;
+    blocos.push(b.trim());
+  });
+  document.getElementById('lkResultado').value = blocos.join('\n\n');
+}
+function lkManual() { lkEditado = true; document.getElementById('lkRegen').classList.remove('hidden'); }
+function lkRegen() { lkEditado = false; document.getElementById('lkRegen').classList.add('hidden'); lkGerar(); }
+function lkCopiar(p) { copiarComAviso(document.getElementById('lkResultado').value, p, 'Preencha ao menos um livro para copiar.'); }
+
+/* =============== LIVROS GRATUITOS =============== */
+const STORAGE_KEY = 'kindle_generator_data_v2';
+
+const DEFAULT_HEADER = `*Ebooks gratuitos na Amazon hoje!*
+
+Clique em *“Comprar agora com 1-Clique”* e ele vai aparecer no seu dispositivo Kindle ou no seu aplicativo Kindle para celular`;
+
+const NUMBER_EMOJIS = ["1️⃣","2️⃣","3️⃣","4️⃣","5️⃣","6️⃣","7️⃣","8️⃣","9️⃣","🔟","1️⃣1️⃣","1️⃣2️⃣","1️⃣3️⃣","1️⃣4️⃣","1️⃣5️⃣","1️⃣6️⃣","1️⃣7️⃣","1️⃣8️⃣","1️⃣9️⃣","2️⃣0️⃣"];
+
+let books = [{ id: Date.now(), title: "", link: "", price: "" }];
+let currentPreviewMode = 'whatsapp';
+
+const headerInput = document.getElementById('headerText');
+const footerInput = document.getElementById('footerText');
+const booksContainer = document.getElementById('booksContainer');
+const previewBox = document.getElementById('previewBox');
+const previewContainer = document.getElementById('previewContainer');
+const previewFooterTag = document.getElementById('previewFooterTag');
+const charCounter = document.getElementById('charCounter');
+const bookCountBadge = document.getElementById('bookCountBadge');
+const tabWa = document.getElementById('tabWa');
+const tabTg = document.getElementById('tabTg');
+
+function getNumberEmoji(index) {
+  return index < NUMBER_EMOJIS.length ? NUMBER_EMOJIS[index] : `${index + 1}️⃣`;
+}
+
+function saveToLocalStorage() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ header: headerInput.value, footer: footerInput.value, books }));
+  } catch (e) { console.warn('Não foi possível salvar no localStorage:', e); }
+}
+
+function loadFromLocalStorage() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      const p = JSON.parse(saved);
+      headerInput.value = typeof p.header === 'string' ? p.header : DEFAULT_HEADER;
+      if (typeof p.footer === 'string') footerInput.value = p.footer;
+      books = Array.isArray(p.books) && p.books.length > 0 ? p.books : [{ id: Date.now(), title: "", link: "", price: "" }];
+      return;
+    }
+  } catch (e) { console.warn('Erro ao carregar dados do localStorage:', e); }
+  headerInput.value = DEFAULT_HEADER;
+  books = [{ id: Date.now(), title: "", link: "", price: "" }];
+}
+
+function restoreDefaultHeader() { headerInput.value = DEFAULT_HEADER; updatePreview(); }
+
+function addBookInput() {
+  books.push({ id: Date.now() + Math.random(), title: "", link: "", price: "" });
+  renderBookInputs();
+  updatePreview();
+}
+
+function removeBook(id) {
+  if (books.length === 1) {
+    showToast("Atenção", "Mantenha pelo menos 1 livro no seu post.", "fa-solid fa-triangle-exclamation text-amber-400");
+    return;
+  }
+  books = books.filter(b => b.id !== id);
+  renderBookInputs();
+  updatePreview();
+}
+
+function updateBookData(id, field, value) {
+  const book = books.find(b => b.id === id);
+  if (book) { book[field] = value; updatePreview(); }
+}
+
+function escapeHtml(text) {
+  return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+}
+
+function renderBookInputs() {
+  booksContainer.innerHTML = '';
+  books.forEach((book, index) => {
+    const card = document.createElement('div');
+    card.className = "bg-purple-50/40 border border-purple-200/80 rounded-2xl p-3.5 md:p-4 transition-all hover:border-purple-300 relative";
+    card.innerHTML = `
+      <div class="flex items-center justify-between mb-2.5">
+        <span class="inline-flex items-center gap-1.5 text-xs font-bold text-purple-900 bg-white px-2.5 py-1 rounded-lg border border-purple-200 shadow-xs">
+          <span class="text-base leading-none">${getNumberEmoji(index)}</span> Livro ${index + 1}
+        </span>
+        ${books.length > 1 ? `
+          <button onclick="removeBook(${book.id})" class="text-slate-400 hover:text-red-500 p-1.5 rounded-lg hover:bg-red-50 transition-colors text-xs flex items-center gap-1" title="Remover livro">
+            <i class="fa-solid fa-trash-can"></i> <span class="hidden sm:inline">Remover</span>
+          </button>` : ''}
+      </div>
+      <div class="space-y-3">
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Título do Livro</label>
+          <input type="text" value="${escapeHtml(book.title || '')}" oninput="updateBookData(${book.id}, 'title', this.value)" placeholder="Ex: Amor Como Este (Crônicas Românticas)" class="${INPUT_CLS}">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Link do Livro (Amazon)</label>
+          <input type="url" value="${escapeHtml(book.link || '')}" oninput="updateBookData(${book.id}, 'link', this.value)" placeholder="Ex: https://link.amazon/B0heIsy1q" class="${INPUT_CLS} font-mono text-xs">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Preço <span class="text-slate-400 font-normal">(Opcional - ex: 29,90 ou 0,00)</span></label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-purple-700 font-bold text-xs">R$</div>
+            <input type="text" value="${escapeHtml(book.price || '')}" oninput="updateBookData(${book.id}, 'price', this.value)" placeholder="29,90 ou 0,00 (ou Grátis)" class="${INPUT_CLS} pl-9">
+          </div>
+        </div>
+      </div>`;
+    booksContainer.appendChild(card);
+  });
+  bookCountBadge.textContent = `${books.length} ${books.length === 1 ? 'livro' : 'livros'}`;
+}
+
+function generateWhatsAppText() {
+  const parts = [];
+  const header = headerInput.value.trim();
+  if (header) parts.push(header);
+
+  const list = [];
+  books.forEach((book, index) => {
+    const title = book.title.trim(), link = book.link.trim(), price = (book.price || '').trim();
+    if (title || link || price) {
+      let entry = `${getNumberEmoji(index)} *${title}*`;
+      if (link) entry += `\n${link}`;
+      if (price) {
+        let p = price;
+        if (!/r\$/i.test(p) && !/gr[áa]tis/i.test(p)) p = `R$ ${p}`;
+        entry += `\n💰 ${p}`;
+      }
+      list.push(entry);
+    }
+  });
+  if (list.length) parts.push(list.join('\n\n'));
+
+  const footer = footerInput.value.trim();
+  if (footer) parts.push(footer);
+  return parts.join('\n\n');
+}
+
+function formatMarkdownToHtml(text, mode = 'whatsapp') {
+  if (!text) return '<span class="text-slate-400 italic">Preencha os campos para visualizar aqui...</span>';
+  let f = text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  if (mode === 'telegram') {
+    f = f.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-slate-900">$1</strong>');
+    f = f.replace(/~~(.*?)~~/g, '<del class="line-through text-slate-400">$1</del>');
+  } else {
+    f = f.replace(/\*(.*?)\*/g, '<strong class="font-bold text-slate-900">$1</strong>');
+    f = f.replace(/~(.*?)~/g, '<del class="line-through text-slate-400">$1</del>');
+  }
+  return f.replace(/(https?:\/\/[^\s]+)/g, '<span class="text-purple-600 underline font-mono text-xs break-all">$1</span>');
+}
+
+function switchPreviewMode(mode) {
+  currentPreviewMode = mode;
+  const base = "rounded-2xl p-3 md:p-4 border min-h-[220px] max-h-[380px] md:max-h-[460px] overflow-y-auto custom-scrollbar flex flex-col justify-between shadow-inner transition-colors duration-300";
+  const tabBase = "px-2.5 py-1 rounded-md transition-all flex items-center gap-1 ";
+  if (mode === 'telegram') {
+    tabTg.className = tabBase + "bg-white text-[#24A1DE] shadow-xs";
+    tabWa.className = tabBase + "text-slate-500 hover:text-slate-800";
+    previewContainer.className = "tg-bg border-blue-200 " + base;
+    previewFooterTag.className = "text-[11px] text-[#229ED9] font-medium text-right mt-2 flex items-center justify-end gap-1";
+    previewFooterTag.innerHTML = '<i class="fa-brands fa-telegram"></i> Visualização para Telegram (** e ~~)';
+  } else {
+    tabWa.className = tabBase + "bg-white text-emerald-700 shadow-xs";
+    tabTg.className = tabBase + "text-slate-500 hover:text-slate-800";
+    previewContainer.className = "wa-bg border-purple-200 " + base;
+    previewFooterTag.className = "text-[11px] text-purple-600 font-medium text-right mt-2 flex items-center justify-end gap-1";
+    previewFooterTag.innerHTML = '<i class="fa-brands fa-whatsapp"></i> Visualização para WhatsApp (* e ~)';
+  }
+  updatePreview();
+}
+
+function updatePreview() {
+  const raw = generateWhatsAppText();
+  const shown = currentPreviewMode === 'telegram' ? convertWhatsAppToTelegram(raw) : raw;
+  previewBox.innerHTML = formatMarkdownToHtml(shown, currentPreviewMode);
+  charCounter.textContent = `${shown.length} caracteres`;
+  saveToLocalStorage();
+}
+
+async function copyToClipboard(platform) {
+  const ok = await copiarComAviso(generateWhatsAppText(), platform, 'Preencha ao menos um livro para copiar.');
+  if (ok) animateCopyButton(platform);
+}
+
+function animateCopyButton(platform) {
+  const ids = platform === 'telegram' ? ['copyBtnTg', 'copyBtnMobileTg'] : ['copyBtnWa', 'copyBtnMobileWa'];
+  ids.forEach(id => {
+    const btn = document.getElementById(id);
+    if (!btn) return;
+    const original = btn.innerHTML;
+    btn.innerHTML = `<i class="fa-solid fa-check"></i> Copiado!`;
+    btn.classList.add('scale-95', 'opacity-90');
+    setTimeout(() => { btn.innerHTML = original; btn.classList.remove('scale-95', 'opacity-90'); }, 1800);
+  });
+}
+
+function resetForm() {
+  try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+  headerInput.value = DEFAULT_HEADER;
+  footerInput.value = '';
+  books = [{ id: Date.now(), title: "", link: "", price: "" }];
+  renderBookInputs();
+  updatePreview();
+  showToast("Campos Limpos", "Todos os dados foram apagados e o formulário foi reiniciado.", "fa-solid fa-rotate-left text-purple-400");
+}
+
+/* =============== INICIALIZAÇÃO =============== */
+window.addEventListener('load', () => {
+  ofGerar();
+  lkAdd();
+  loadFromLocalStorage();
+  renderBookInputs();
+  updatePreview();
+  headerInput.addEventListener('input', updatePreview);
+  footerInput.addEventListener('input', updatePreview);
+  go(location.hash.slice(1) || 'home', true);
+});
+</script>
+</body>
+</html>
